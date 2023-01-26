@@ -20,11 +20,12 @@ const linking: LinkingOptions<RootStackParamList> = {
               HomeScreen: 'home',
             },
           },
-          Login: {
-            screens: {
-              Login: 'login',
-            },
-          },
+        },
+      },
+      Auth: {
+        screens: {
+          Login: 'login',
+          Register: 'register'
         },
       },
       Modal: 'modal',
