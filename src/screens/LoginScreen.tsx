@@ -6,11 +6,15 @@ import Colors from '../constants/Colors';
 
 export default function LoginScreen() {
   const navigator = useNavigation();
+
+  const handleRegister  = () => {
+    navigator.navigate("Register")
+  } 
   return (
 
     <View  style={styles.container}>
       <Image style={styles.image}></Image>
-      <Button title="click me" onPress={() => {navigator.navigate("Register")}}></Button>
+      <Button title="click me" onPress={handleRegister}></Button>
     </View>
   );
 }
