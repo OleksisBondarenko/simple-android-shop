@@ -38,7 +38,7 @@ export type RootTabParamList = {
   Profile: undefined;
   Shipping: undefined;
   SingleProduct: undefined;
-  Auth: undefined;
+  Settings: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<

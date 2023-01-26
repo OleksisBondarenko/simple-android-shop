@@ -14,9 +14,9 @@ import useColorScheme from '../hooks/useColorScheme';
 
 import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
-import { AuthParamList, RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 
-const Stack = createNativeStackNavigator<AuthParamList>();
+const Stack = createNativeStackNavigator<RootTabParamList>();
 
 export default function AuthStack() {
   return (

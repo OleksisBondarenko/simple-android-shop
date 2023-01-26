@@ -20,12 +20,18 @@ const linking: LinkingOptions<RootStackParamList> = {
               HomeScreen: 'home',
             },
           },
-        },
-      },
-      Auth: {
-        screens: {
-          Login: 'login',
-          Register: 'register'
+          Login: "login",
+          Register: "register",
+          Cart: "cart",
+          NotVerify: "notVerify",
+          Order: "order",
+          Payment: "payment",
+          PlaceOrder: "placeOrder",
+          Profile: "profile",
+          Settings: "settings",
+          Shipping: "shipping",
+          SingleProduct: "singleProduct",
+          
         },
       },
       Modal: 'modal',
