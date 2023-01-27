@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Colors from '../constants/Colors'
+import ButtonMain from './ButtonMain';
 
 interface IButton {
   text?: string,
@@ -15,11 +16,12 @@ const ButtonTransparent = ({text, onPress}: IButton) => {
   }
 
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.mainButton}>
-      <Text style={styles.text}>
-        {text}
-      </Text>
-    </TouchableOpacity>
+   <ButtonMain 
+   text={text}
+   onPress={handlePress} 
+   paddingHorizontal={10} 
+   backgroundColor={'transparent'}
+   ></ButtonMain>
   )
 }
 
