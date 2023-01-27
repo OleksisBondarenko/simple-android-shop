@@ -21,7 +21,6 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import TabOneScreen from '../screens/TabOneScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
-import AuthStack from './AuthStack';
 import LinkingConfiguration from './LinkingConfiguration';
 import RootStack from './RootStack';
 
@@ -96,7 +95,7 @@ function BottomTabNavigator() {
         name="Register"
         component={RegisterScreen}
         options={{
-          title: 'Auth',
+          title: 'Register',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
