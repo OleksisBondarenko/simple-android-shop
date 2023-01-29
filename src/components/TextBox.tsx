@@ -1,16 +1,17 @@
 import React, { ReactNode } from 'react';
-import { View,  StyleSheet, TextInput, Pressable } from 'react-native';
+import { View,  StyleSheet, TextInput, Pressable, TextInputProps } from 'react-native';
+import { StyleProps } from 'react-native-reanimated';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 
 export interface ITextBox {
   icon?: ReactNode | undefined
-  placeholder?: string
-  secureTextEntry?: boolean
+  props?: TextInputProps | React.ClassAttributes<TextInput>
+  _styles?: StyleProps
   onIconPress?: Function
 }
 
-const TextBox = ({ icon, placeholder,onIconPress,secureTextEntry }: ITextBox) => {
+const TextBox = ({ icon, props, onIconPress,  _styles }: ITextBox) => {
   const colorScheme = useColorScheme();
 
   const theme = Colors[colorScheme];
@@ -21,31 +22,34 @@ const TextBox = ({ icon, placeholder,onIconPress,secureTextEntry }: ITextBox) =>
     }
   }
   return (
-    <View style={{ ...styles.container }}>
-      <Pressable onPress={handleIconPress}>{icon}</Pressable>
-      <TextInput style={{ ...styles.input, color: theme.text }} placeholder={placeholder} placeholderTextColor={theme.lightblack} secureTextEntry={secureTextEntry}></TextInput>
+    <View style={[styles.container]}>
+      <Pressable onPress={handleIconPress} style={_styles?.icon}>{icon}</Pressable>
+      <TextInput style={[styles.input, {color: theme.text },  _styles]}  placeholderTextColor={theme.lightblack} {...props}></TextInput>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: 'transparent',
-    borderColor: 'transparent',
-    borderBottomColor: Colors.light.lightblack,
-    borderWidth: 2,
-    borderStyle: 'solid',
-    paddingBottom: 2,
-
+    paddingVertical: 2,
   },
   icon: {
-    padding: 5,
+    // flex: 1,
+    // height: "100%",
+    // aspectRatio: 1
   },
   input: {
-    width: "80%",
+    flex: 1,
     borderRadius: 2,
-    marginLeft: 10,
+    paddingLeft: 5,
+    // height: 20,
+    // width: 100,
+    // backgroundColor: 'red'
   },
 
 })

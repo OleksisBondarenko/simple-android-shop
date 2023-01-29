@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Button, Image, StyleSheet } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'; 
-import { Feather } from '@expo/vector-icons'; 
+import { StyleSheet } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
 
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
@@ -10,10 +9,10 @@ import Layout from '../constants/Layout';
 import Header1 from '../components/Header1';
 import useColorScheme from '../hooks/useColorScheme';
 import TextBox from '../components/TextBox';
-import { TextInput } from 'react-native-gesture-handler';
 import TextBoxPassword from '../components/TextBoxPassword';
 import ButtonMain from '../components/ButtonMain';
 import ButtonTransparent from '../components/ButtonTransparent';
+import TextBoxLogin from '../components/TextBoxLogin';
 
 export default function LoginScreen() {
   const navigator = useNavigation();
@@ -36,13 +35,13 @@ export default function LoginScreen() {
           <Header1 text={'LOGIN'} />
         </View>
         <View style={styles.textInput}>
-          <TextBox icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
+          <TextBoxLogin icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
         </View>
         <View style={styles.textInput}>
           <TextBoxPassword ></TextBoxPassword>
         </View>
         <ButtonMain text="LOGIN" onPress={handleLogin}></ButtonMain>
-        <ButtonTransparent text="sign up" onPress={handleGoSignUp}></ButtonTransparent>
+        <ButtonTransparent text="Sign up" onPress={handleGoSignUp}></ButtonTransparent>
       </View>
     </View>
   );

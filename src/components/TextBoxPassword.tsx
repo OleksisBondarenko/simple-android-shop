@@ -3,6 +3,7 @@ import React, {  useState } from 'react';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import TextBox, { ITextBox } from './TextBox';
+import TextBoxLogin from './TextBoxLogin';
 
 
 const TextBoxPassword = ({}: ITextBox) => {
@@ -18,7 +19,7 @@ const TextBoxPassword = ({}: ITextBox) => {
   const eyeIcon = !isSecured ? "eye" : "eye-off";
 
   return (
-      <TextBox secureTextEntry={isSecured} onIconPress={handleVisible} icon={<Feather name={eyeIcon} size={24} color={theme.main}/>}></TextBox>
+      <TextBoxLogin props={{secureTextEntry: isSecured}} onIconPress={handleVisible} icon={<Feather name={eyeIcon} size={24} color={theme.main}/>}></TextBoxLogin>
   )
 }
 

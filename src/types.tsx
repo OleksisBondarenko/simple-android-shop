@@ -45,3 +45,18 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export interface IReview {
+  userName: any,
+  text: string,
+  score: number
+}
+
+export interface IProduct {
+    name: string,
+    imageURL: string,
+    reviews:  IReview[],
+    price: number,
+    actualPrice?: number | null,
+}
+

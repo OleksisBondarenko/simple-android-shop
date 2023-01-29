@@ -4,5 +4,5 @@
     "jsx": "react-jsx",
   },
   "extends": "expo/tsconfig.base",
-  "include": ["./src/images.d.ts"]
+  "include": ["./src/images.d.ts", "./src/styles.d.ts"]
 }

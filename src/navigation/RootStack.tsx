@@ -25,7 +25,7 @@ export default function RootStack() {
 
   return (
     <Stack.Navigator  
-    initialRouteName="Login"
+    initialRouteName="Home"
     screenOptions={{
       navigationBarColor: Colors[colorScheme].tint,
       headerBackVisible: false,

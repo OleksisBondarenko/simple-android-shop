@@ -6,6 +6,7 @@ import ButtonMain from '../components/ButtonMain';
 import ButtonTransparent from '../components/ButtonTransparent';
 import Header1 from '../components/Header1';
 import TextBox from '../components/TextBox';
+import TextBoxLogin from '../components/TextBoxLogin';
 import TextBoxPassword from '../components/TextBoxPassword';
 
 import { View } from '../components/Themed';
@@ -15,7 +16,7 @@ import useColorScheme from '../hooks/useColorScheme';
 
 export default function RegisterScreen() {
   const colorScheme = useColorScheme();
-const navigate = useNavigation();
+  const navigate = useNavigation();
 
   const handleRegister = () => {
     navigate.navigate("Login");
@@ -35,10 +36,10 @@ const navigate = useNavigation();
         </View>
 
         <View style={styles.textInput}>
-          <TextBox icon={<AntDesign name="user" size={24} color={Colors[colorScheme].main} />} />
+          <TextBoxLogin icon={<AntDesign name="user" size={24} color={Colors[colorScheme].main} />} />
         </View> 
         <View style={styles.textInput}>
-          <TextBox icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
+          <TextBoxLogin icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
         </View>
         <View style={styles.textInput}>
           <TextBoxPassword ></TextBoxPassword>
@@ -47,7 +48,7 @@ const navigate = useNavigation();
           <TextBoxPassword ></TextBoxPassword>
         </View>
         <ButtonMain text="SIGN UP" onPress={handleRegister}></ButtonMain>
-        <ButtonTransparent text="already have account?" onPress={handleGoLogin}></ButtonTransparent>
+        <ButtonTransparent text="Already have account?" onPress={handleGoLogin}></ButtonTransparent>
         </View>
     </View>
   );
