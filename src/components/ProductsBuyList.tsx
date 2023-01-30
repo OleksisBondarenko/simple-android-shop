@@ -6,19 +6,23 @@ import Layout from '../constants/Layout'
 import { IProduct } from '../types'
 import Header3 from './Header3'
 import ProductCard from './ProductCard'
+import productStore from '../store/productStore'
+
 
 interface IProductBuyList {
+  title?: string 
   products?: IProduct[]
 }
-const ProductsBuyList = ({ products = MOCK_PRODUCTS_LIST }: IProductBuyList) => {
+const ProductsBuyList = ({title = 'All the products' }: IProductBuyList) => {
+  const { foundProducts: products } = productStore;
 
   return (
     <ScrollView style={styles.wrapper}>
-      <Header3 text={'Recomendations'}></Header3>
+      <Header3 text={title}></Header3>
       <View style={styles.container}>
         {
-          [...products, ...products, ...products, ...products].map((product, index) => {
-            return <View key={product.name} style={[styles.content, index % 2 ? styles.rightBorder : null]}>
+          products.map((product, index) => {
+            return <View key={product.name} style={[styles.content, styles.border, index % 2 ? styles.rightBorder : null]}>
               <ProductCard product={product}></ProductCard>
             </View>
           })
@@ -30,24 +34,29 @@ const ProductsBuyList = ({ products = MOCK_PRODUCTS_LIST }: IProductBuyList) => 
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1
+    flex: 1,
+    backgroundColor: Colors.light.background
   },
   container: {
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    // gap: 5
+    paddingBottom: 30
 
   },
   content: {
-    // width: Layout.window.width / 2 - Layout.window.width * 0.06
-    width: 'calc(50%)'
+    width: '50%'
   },
   rightBorder: {
-    borderColor: "transparent",
-    borderLeftColor: Colors.light.lightblack,
-    borderStyle: 'solid',
+    borderLeftWidth: 1,
   },
+  border: {
+    
+    borderColor: Colors.light.darkGray,
+    borderBottomWidth: 1,
+    borderStyle: 'solid',
+  }
 })
+
 export default ProductsBuyList

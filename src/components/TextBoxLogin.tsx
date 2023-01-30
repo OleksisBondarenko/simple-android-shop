@@ -3,10 +3,11 @@ import { View,  StyleSheet, TextInput, Pressable, TextInputProps } from 'react-n
 import Colors from '../constants/Colors';
 import TextBox, { ITextBox } from './TextBox';
 
+
 const TextBoxLogin = (props: ITextBox) => {
   return (
     <View style={{ ...styles.container }}>
-      <TextBox _styles={styles.textBox} {...props}/>
+      <TextBox styles={styles.textBox} {...props}/>
     </View>
   )
 }
@@ -15,12 +16,12 @@ const styles = StyleSheet.create({
   container: {
     height: 32,
     borderColor: 'transparent',
-    borderBottomColor: Colors.light.lightblack,
+    borderBottomColor: Colors.light.darkGray,
     borderWidth: 1,
     borderStyle: 'solid',
   }, 
   textBox: {
-    height: 32,
+    height: 24,
     width: 32
   }
 })

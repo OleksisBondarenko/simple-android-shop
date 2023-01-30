@@ -1,22 +1,25 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import React, { ReactNode } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, StyleProp, ViewStyle, TextStyle } from 'react-native'
 import Colors from '../constants/Colors'
 import useColorScheme from '../hooks/useColorScheme';
+import { MonoText } from './StyledText';
 
-interface IButton {
+export interface IButton {
   text?: string
+  icon?: ReactNode
   onPress?: Function
-  paddingVertical?: number
-  paddingHorizontal?: number
-  borderRadius?: number
-  color?: string,
-  backgroundColor?: string,
+  containerStyles?: ViewStyle 
+  textStyles?: TextStyle
 }
 
-const ButtonMain = ({text, onPress, ...props}: IButton) => {
+const ButtonMain = ({text, icon, onPress, containerStyles, textStyles}: IButton) => {
   const colorScheme = useColorScheme();
 
-  const {paddingVertical = 10, paddingHorizontal = 40, borderRadius = 60, color = Colors[colorScheme].white, backgroundColor = Colors[colorScheme].main } = props
+  const defaultContainerStyles: ViewStyle = {borderRadius: 60, backgroundColor: Colors[colorScheme].main, flexDirection: 'row', alignItems: 'center' }
+  containerStyles = {...defaultContainerStyles, ...containerStyles, }
+
+  const defaultTextSTyles: TextStyle = {color: Colors[colorScheme].text}
+  textStyles = {...defaultTextSTyles, ...textStyles, }
 
   const handlePress = () => {
     if (onPress) {
@@ -25,10 +28,11 @@ const ButtonMain = ({text, onPress, ...props}: IButton) => {
   }
 
   return (
-    <TouchableOpacity onPress={handlePress} style={{backgroundColor, paddingVertical, paddingHorizontal, borderRadius}}>
-      <Text style={{color}}>
+    <TouchableOpacity onPress={handlePress} style={containerStyles}>
+      <Text>{icon}</Text>
+      <MonoText style={textStyles}>
         {text}
-      </Text>
+      </MonoText>
     </TouchableOpacity>
   )
 }

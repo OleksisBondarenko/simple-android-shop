@@ -1,23 +1,39 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Colors from '../constants/Colors';
 
-const BottomBar = () => {
+const BottomMenuBar = () => {
+  const navigator = useNavigation()
+
+  const handleHomePress = () => {
+    console.log("Home press");
+    // navigator.navigate("Home");
+  }
+
+  const handleCartPress = () => {
+    navigator.navigate("Cart");
+  }
+
+  const handleUserPress = () => {
+    navigator.navigate("Login");
+  }
 
 
   return (
-    <View style={styles.bar}>
-      <TouchableOpacity style={styles.item} containerStyle={styles.item}>
+    <View  style={styles.bar}>
+      <TouchableOpacity onPress={handleHomePress} style={styles.item}>
         <FontAwesome style={styles.side} name='home' size={24} color={Colors.light.main}/>
       </TouchableOpacity>
       
-      <TouchableOpacity style={styles.center} containerStyle={styles.item}>
+      <View style={styles.item}>
+      <TouchableOpacity onPress={handleCartPress} style={styles.center}>
         <FontAwesome  name='shopping-basket' size={28} color={Colors.light.white} />
       </TouchableOpacity>
+      </View>
 
-      <TouchableOpacity style={styles.item} containerStyle={styles.item}>
+      <TouchableOpacity onPress={handleUserPress} style={styles.item}>
         <FontAwesome style={styles.side} name='user' size={24} color={Colors.light.main}/>
       </TouchableOpacity>
     </View>
@@ -29,18 +45,16 @@ const styles = StyleSheet.create({
     position: 'relative',
     paddingHorizontal: 20,
     flexDirection: 'row',
-    // justifyContent: 'space-between',
-    gap: '10',
     height: 40,
   },
   item: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 60
   },
   center: {
     flex: 1,
-    position: 'absolute',
     height: 60,
     width: 60,
     paddingVertical: 10,
@@ -56,4 +70,4 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-export default BottomBar
+export default BottomMenuBar

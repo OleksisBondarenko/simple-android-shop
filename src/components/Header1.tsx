@@ -1,14 +1,19 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TextStyle } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import { useThemeColor } from './Themed';
 
-const Header1 = ({text}) => {
+export interface IHeader {
+  text: string, 
+  styles?: TextStyle
+}
+
+const Header1 = ({text, styles: _styles}: IHeader) => {
   const colorScheme = useColorScheme();
 
   return (
-      <Text style={{...styles.header, color: Colors[colorScheme].text}}>{text}</Text>
+      <Text style={[{...styles.header, color: Colors[colorScheme].text}, _styles]}>{text}</Text>
   )
 }
 

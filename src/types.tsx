@@ -39,6 +39,7 @@ export type RootTabParamList = {
   Shipping: undefined;
   SingleProduct: undefined;
   Settings: undefined;
+  ProductScreen: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
@@ -49,14 +50,31 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> = Composit
 export interface IReview {
   userName: any,
   text: string,
-  score: number
+  score: number,
+  date: string,
 }
 
 export interface IProduct {
     name: string,
     imageURL: string,
+    description: string,
     reviews:  IReview[],
     price: number,
     actualPrice?: number | null,
+    isAvailable?: boolean
 }
 
+export interface IProductCount extends IProduct {
+  count: number
+}
+
+export interface IUser {
+  name: string,
+  email: string,
+  phoneNumber: string,
+  password: string,
+  isActive?: boolean,
+  buyedProducts: IProductCount [],
+  cartProducts: IProductCount [],
+  imageURI?: string,
+}

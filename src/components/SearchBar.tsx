@@ -30,7 +30,7 @@ const SearchBar = ({ props, onIconPress }: ISearchBar) => {
         <FontAwesome name="search" style={styles.icon} onPress={handleIconPress}></FontAwesome>
       <View style={styles.separator}></View></View>
       
-      } _styles={{ paddingVertical: 10, paddingLeft: 10, paddingRight: -10 }} />
+      } styles={{ paddingVertical: 10, paddingLeft: 10, paddingRight: -10 }} />
 
     </View>
   )
@@ -41,21 +41,21 @@ const styles = StyleSheet.create({
     gap: 5,
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: Colors.light.lightblack,
+    borderColor: Colors.light.darkGray,
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 5,
   },
   separatorBox: { flex: 1, flexDirection: 'row', alignItems: "center" },
   separator: {
-    backgroundColor: Colors.light.lightblack,
+    backgroundColor: Colors.light.darkGray,
     width: 1,
     height: 32,
   },
   icon: {
     fontSize: 20,
     padding: 10,
-    color: Colors.light.lightblack,
+    color: Colors.light.darkGray,
   }
 })
 

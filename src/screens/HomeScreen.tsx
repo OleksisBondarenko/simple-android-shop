@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Button, ScrollView, StyleSheet } from 'react-native';
 
@@ -6,12 +6,18 @@ import { Text, View } from '../components/Themed';
 import SearchBar from '../components/SearchBar';
 import Header3 from '../components/Header3';
 import Layout from '../constants/Layout';
-import BottomBar from '../components/MainMenuBar';
+import BottomMenuBar from '../components/BottomMenuBar';
 import ProductsBuyList from '../components/ProductsBuyList';
 import ProductCard from '../components/ProductCard';
+import userStore from '../store/userStore';
 
 export default function HomeScreen() {
   const navigate = useNavigation();
+  
+  useEffect(() => {
+    
+  }, [])
+
   const handleGoToRegister = () => {
     navigate.navigate("Login");
   }
@@ -19,17 +25,15 @@ export default function HomeScreen() {
   return (
     <View style={styles.wrapper}>
       <View style={styles.container}>
-        <View style={[styles.searchBar]}>
+        <View style={[styles.searchBar, styles.marginCenter]}>
           <SearchBar></SearchBar>
-        </View>
-        {/* <ScrollView style={styles.content}> */}
+        </View >
+        <View style={styles.products}>
           <ProductsBuyList></ProductsBuyList>
-        {/* </ScrollView> */}
-        {/* <Button title="I have account" onPress={handleGoToRegister}></Button> */}
-
-        <View>
-          <BottomBar></BottomBar>
         </View>
+        {/* <View > */}
+          <BottomMenuBar></BottomMenuBar>
+        {/* </View> */}
       </View>
     </View>
   );
@@ -44,10 +48,25 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginHorizontal: Layout.window.width * 0.05,
+  },
+  marginCenter: {
+    paddingHorizontal: Layout.window.width * 0.05,
+  },
+  products: {
+    flex: 1,
   },
   searchBar: {
-    marginBottom: 15
+    paddingBottom: 15,
+    marginBottom: 3,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 2.84,
+
+    elevation: 2,
   },
   content: {
     flex: 1,

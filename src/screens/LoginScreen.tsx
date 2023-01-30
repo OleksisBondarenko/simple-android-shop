@@ -13,10 +13,13 @@ import TextBoxPassword from '../components/TextBoxPassword';
 import ButtonMain from '../components/ButtonMain';
 import ButtonTransparent from '../components/ButtonTransparent';
 import TextBoxLogin from '../components/TextBoxLogin';
+import userStore from '../store/userStore';
 
 export default function LoginScreen() {
   const navigator = useNavigation();
   const colorScheme = useColorScheme();
+
+  const { user } = userStore;
 
   const handleLogin = () => {
     navigator.navigate("Home")
@@ -35,12 +38,12 @@ export default function LoginScreen() {
           <Header1 text={'LOGIN'} />
         </View>
         <View style={styles.textInput}>
-          <TextBoxLogin icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
+          <TextBoxLogin defaultValue={user.email} icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
         </View>
         <View style={styles.textInput}>
           <TextBoxPassword ></TextBoxPassword>
         </View>
-        <ButtonMain text="LOGIN" onPress={handleLogin}></ButtonMain>
+        <ButtonMain text="LOGIN" onPress={handleLogin} containerStyles={{paddingVertical: 10, paddingHorizontal: 40, marginBottom: 15}}></ButtonMain>
         <ButtonTransparent text="Sign up" onPress={handleGoSignUp}></ButtonTransparent>
       </View>
     </View>

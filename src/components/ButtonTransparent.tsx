@@ -21,23 +21,20 @@ const ButtonTransparent = ({ text, onPress }: IButton) => {
     <ButtonMain
       text={text}
       onPress={handlePress}
-      paddingHorizontal={10}
-      backgroundColor={'transparent'}
-      color={Colors[colorScheme].lightblack}
+      containerStyles={styles.button}
+      textStyles={{
+        color: Colors[colorScheme].darkGray,
+        padding: 10,
+      }}
     ></ButtonMain>
   )
 }
 
 const styles = StyleSheet.create({
-  mainButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 5,
-    borderRadius: 60,
-    backgroundColor: "transparent",
+  button: {
+    paddingHorizontal: 10,
+    backgroundColor: 'transparent',
   },
-  text: {
-    color: Colors['light'].lightblack,
-    // fontWeight: "bold"
-  }
+
 })
 export default ButtonTransparent

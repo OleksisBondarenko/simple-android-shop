@@ -47,7 +47,7 @@ export default function RegisterScreen() {
         <View style={styles.textInput}>
           <TextBoxPassword ></TextBoxPassword>
         </View>
-        <ButtonMain text="SIGN UP" onPress={handleRegister}></ButtonMain>
+        <ButtonMain text="SIGN UP" onPress={handleRegister} containerStyles={{paddingVertical: 10, paddingHorizontal: 40, marginBottom: 15}}></ButtonMain>
         <ButtonTransparent text="Already have account?" onPress={handleGoLogin}></ButtonTransparent>
         </View>
     </View>
