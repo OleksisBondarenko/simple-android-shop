@@ -65,16 +65,19 @@ export interface IProduct {
 }
 
 export interface IProductCount extends IProduct {
-  count: number
+  count: number,
+  key: Symbol
 }
 
 export interface IUser {
   name: string,
   email: string,
-  phoneNumber: string,
+  role?: string, 
+  phoneNumber?: string,
   password: string,
   isActive?: boolean,
-  buyedProducts: IProductCount [],
-  cartProducts: IProductCount [],
-  imageURI?: string,
+  activatedDate: string,
+  buyedProducts?: IProductCount [],
+  cartProducts?: IProductCount [],
+  imageURI: string,
 }

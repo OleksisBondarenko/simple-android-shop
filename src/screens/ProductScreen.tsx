@@ -16,6 +16,7 @@ import userStore from '../store/userStore';
 import ButtonFullWidth from '../components/ButtonFullWidth';
 import { useNavigation } from '@react-navigation/native';
 import ProductTextPrice from '../components/ProductTextPrice';
+import ImagePicker from '../components/ImagePicker';
 
 interface IProductScreen {
   product: IProduct
@@ -24,7 +25,7 @@ interface IProductScreen {
 export default function ProductScreen() {
   const { selectedProduct: product } = productStore;
   const navigator = useNavigation(); 
-
+  
   const [buyCount, setBuyCount] = useState<number>(1);
 
   const handleAddProduct  = () => {
@@ -47,11 +48,12 @@ export default function ProductScreen() {
     setBuyCount(count)
   }
 
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.content}>
-        <Image style={styles.image} source={{ uri: product.imageURL }}></Image>
-        <Header3 text={product.name} styles={{ marginHorizontal: 0 }} />
+          <Image style={styles.image} source={{ uri: product.imageURL }} />
+        <Header3 text={product.name} style={{ marginHorizontal: 0 }} />
         <View style={[styles.reviews, styles.spacer]}>
           <ReviewStars reviews={product.reviews} />
           <Text style={{ marginLeft: 5 }}>{product.reviews.length} reviews</Text>
@@ -68,7 +70,7 @@ export default function ProductScreen() {
           </Text>
         </View>
         {!product.isAvailable || <ButtonFullWidth onPress={handleAddProduct} text="Add to cart" ></ButtonFullWidth>}
-        <Header3 text="Review" styles={{marginHorizontal: 0}}></Header3>
+        <Header3 text="Review" style={{marginHorizontal: 0}}></Header3>
         <View>
           <ProductReviews reviews={product.reviews}></ProductReviews>
         </View>

@@ -6,10 +6,10 @@ import { useThemeColor } from './Themed';
 
 export interface IHeader {
   text: string, 
-  styles?: TextStyle
+  style?: TextStyle
 }
 
-const Header1 = ({text, styles: _styles}: IHeader) => {
+const Header1 = ({text, style: _styles}: IHeader) => {
   const colorScheme = useColorScheme();
 
   return (

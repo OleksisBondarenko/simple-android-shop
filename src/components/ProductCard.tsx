@@ -42,7 +42,7 @@ const ProductCard = ({ product }: IProductCard) => {
           <View style={styles.reviews}>
             <ReviewStars reviews={product.reviews}></ReviewStars>
             <Text style={{ marginBottom: 2 }}>
-              {String(product.reviews.length)}
+              {String(product.reviews.length || "" )}
             </Text>
           </View>
           <View style={styles.bottom}>

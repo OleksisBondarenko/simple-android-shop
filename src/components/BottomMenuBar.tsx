@@ -3,8 +3,10 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Colors from '../constants/Colors';
+import userStore from '../store/userStore';
 
 const BottomMenuBar = () => {
+  const { user } = userStore;
   const navigator = useNavigation()
 
   const handleHomePress = () => {
@@ -17,7 +19,11 @@ const BottomMenuBar = () => {
   }
 
   const handleUserPress = () => {
-    navigator.navigate("Login");
+    if (user.isActive) {
+      navigator.navigate("Profile");
+    } else {
+      navigator.navigate("Login");
+    }
   }
 
 

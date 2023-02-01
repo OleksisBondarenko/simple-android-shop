@@ -1,57 +1,62 @@
-import React, { ReactNode } from 'react';
-import { View,  StyleSheet, TextInput, Pressable, TextInputProps } from 'react-native';
+import React, { ReactNode, useState } from 'react';
+import { View,  StyleSheet, TextInput, Pressable, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 import { StyleProps } from 'react-native-reanimated';
 import Colors from '../constants/Colors';
+import Layout from '../constants/Layout';
 import useColorScheme from '../hooks/useColorScheme';
+import { Text } from './Themed';
 
-export interface ITextBox {
-  icon?: ReactNode | undefined
-  props?: TextInputProps | React.ClassAttributes<TextInput>
-  styles?: StyleProps
+export interface ITextBox extends TextInputProps, React.ClassAttributes<TextInput> {
+  icon?: ReactNode,
+  textInputStyles?: TextStyle,
+  containerStyles? : ViewStyle,
   onIconPress?: Function,
   defaultValue?: string
 }
 
-const TextBox = ({ icon, defaultValue, props, onIconPress,  styles: _styles }: ITextBox) => {
-  const colorScheme = useColorScheme();
+const TextBox = ({ onChangeText,...props}: ITextBox) => {
+  let { icon, defaultValue, onIconPress,  textInputStyles, containerStyles  } = props;
 
-  const theme = Colors[colorScheme];
+  const [text, setText] = useState<string>("");
+
+  const handleChangeText = (text) => {
+    setText(text);
+
+    if (typeof onChangeText == "function") {
+      onChangeText(text)
+    }
+  }
 
   const handleIconPress = () => {
     if (onIconPress) {
       onIconPress();
     }
   }
+
+  containerStyles = { ...styles.container, ...containerStyles }
+  textInputStyles = {...styles.input, ...textInputStyles }
+
   return (
-    <View style={[styles.container]}>
-      <Pressable onPress={handleIconPress} style={_styles?.icon}>{icon}</Pressable>
-      <TextInput style={[styles.input, {color: theme.text },  _styles]}  placeholderTextColor={theme.darkGray} defaultValue={defaultValue} {...props}></TextInput>
+    <View style={containerStyles}>
+      <Pressable onPress={handleIconPress}>{icon}</Pressable>
+      <TextInput {...props} style={textInputStyles} onChangeText={handleChangeText} value={text} 
+      placeholderTextColor={Colors.light.darkGray} defaultValue={defaultValue} ></TextInput>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: 'transparent',
     paddingVertical: 2,
-  },
-  icon: {
-    // flex: 1,
-    // height: "100%",
-    // aspectRatio: 1
   },
   input: {
     flex: 1,
     borderRadius: 2,
     paddingLeft: 5,
-    // height: 16
-    // height: 20,
-    // width: 100,
-    // backgroundColor: 'red'
+    color: Colors.light.text,
   },
 
 })

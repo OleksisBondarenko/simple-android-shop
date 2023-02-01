@@ -16,6 +16,7 @@ import HomeScreen from '../screens/HomeScreen';
 
 import LoginScreen from '../screens/LoginScreen';
 import ProductScreen from '../screens/ProductScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import userStore from '../store/userStore';
@@ -31,7 +32,7 @@ export default function RootStack() {
 
   return (
     <Stack.Navigator
-      initialRouteName= {"Cart" || startPage}
+      initialRouteName= {"Profile" || startPage}
       screenOptions={{
         navigationBarColor: Colors[colorScheme].tint,
         headerBackVisible: false,
@@ -40,6 +41,8 @@ export default function RootStack() {
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      
       <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Cart" component={CartScreen} />

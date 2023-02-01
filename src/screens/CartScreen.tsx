@@ -37,7 +37,7 @@ export default observer(() => {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Header1 text={"Cart"} styles={styles.header}></Header1>
+        <Header1 text={"Cart"} style={styles.header}></Header1>
         <ScrollView style={styles.products}>
           {
             cartProducts?.map((product, index) => {

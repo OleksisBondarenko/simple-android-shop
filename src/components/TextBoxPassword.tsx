@@ -6,7 +6,7 @@ import TextBox, { ITextBox } from './TextBox';
 import TextBoxLogin from './TextBoxLogin';
 
 
-const TextBoxPassword = ({}: ITextBox) => {
+const TextBoxPassword = (props: ITextBox) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme];
 
@@ -19,7 +19,7 @@ const TextBoxPassword = ({}: ITextBox) => {
   const eyeIcon = !isSecured ? "eye" : "eye-off";
 
   return (
-      <TextBoxLogin props={{secureTextEntry: isSecured}} onIconPress={handleVisible} icon={<Feather name={eyeIcon} size={24} color={theme.main}/>}></TextBoxLogin>
+      <TextBoxLogin secureTextEntry= {isSecured} onIconPress={handleVisible} icon={<Feather name={eyeIcon} size={24} color={theme.main}/> } {...props}></TextBoxLogin>
   )
 }
 

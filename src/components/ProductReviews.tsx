@@ -26,12 +26,13 @@ const ProductReviews = ({ reviews }: IProductReviews) => {
     <View style={styles.container}>
       {
         reviews.map((review, index) => <View key={review.userName + index} style={styles.content}>
-          <Header3 text={review.userName} styles={{marginHorizontal: 0}}></Header3>
+          <Header3 text={review.userName} style={{marginHorizontal: 0}}></Header3>
           <ReviewStars reviews={[review]} ></ReviewStars>
           <Text style={styles.spacer}>{review.date}</Text>
           <Text style={styles.spacer}>{review.text}</Text>
         </View>)
       }
+
     </View>
   );
 };

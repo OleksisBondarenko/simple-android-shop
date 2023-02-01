@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { StyleSheet } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
@@ -14,20 +14,28 @@ import ButtonMain from '../components/ButtonMain';
 import ButtonTransparent from '../components/ButtonTransparent';
 import TextBoxLogin from '../components/TextBoxLogin';
 import userStore from '../store/userStore';
+// import { authUser } from '../services/db';
 
 export default function LoginScreen() {
   const navigator = useNavigation();
   const colorScheme = useColorScheme();
-
   const { user } = userStore;
 
+  const refEmail = useRef<string>("");
+  const refPassword = useRef<string>("");
+    
+
   const handleLogin = () => {
+    
+    console.log(user);
+    
     navigator.navigate("Home")
   }
 
   const handleGoSignUp  = () => {
     navigator.navigate("Register")
   } 
+
 
   return (
 
@@ -38,10 +46,10 @@ export default function LoginScreen() {
           <Header1 text={'LOGIN'} />
         </View>
         <View style={styles.textInput}>
-          <TextBoxLogin defaultValue={user.email} icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
+          <TextBoxLogin defaultValue={user.email} onChangeText={text => refEmail.current = text} icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
         </View>
         <View style={styles.textInput}>
-          <TextBoxPassword ></TextBoxPassword>
+          <TextBoxPassword onChangeText={text => refPassword.current = text}></TextBoxPassword>
         </View>
         <ButtonMain text="LOGIN" onPress={handleLogin} containerStyles={{paddingVertical: 10, paddingHorizontal: 40, marginBottom: 15}}></ButtonMain>
         <ButtonTransparent text="Sign up" onPress={handleGoSignUp}></ButtonTransparent>

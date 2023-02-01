@@ -5,10 +5,11 @@ import TextBox, { ITextBox } from './TextBox';
 
 
 const TextBoxLogin = (props: ITextBox) => {
+  const textInputStyles = {...styles.textBox, ...props.textInputStyles}
+  const containerStyles = {...styles.container, ...props.containerStyles}
+
   return (
-    <View style={{ ...styles.container }}>
-      <TextBox styles={styles.textBox} {...props}/>
-    </View>
+      <TextBox {...props} textInputStyles = {textInputStyles} containerStyles={containerStyles}/>
   )
 }
 

@@ -30,7 +30,7 @@ const SearchBar = ({ props, onIconPress }: ISearchBar) => {
         <FontAwesome name="search" style={styles.icon} onPress={handleIconPress}></FontAwesome>
       <View style={styles.separator}></View></View>
       
-      } styles={{ paddingVertical: 10, paddingLeft: 10, paddingRight: -10 }} />
+      } stylesText={{ paddingVertical: 10, paddingLeft: 10, paddingRight: -10 }} />
 
     </View>
   )

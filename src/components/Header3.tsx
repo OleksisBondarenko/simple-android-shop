@@ -8,7 +8,7 @@ import { useThemeColor } from './Themed';
 
 
 
-const Header3 = ({text, styles: _styles}: IHeader) => {
+const Header3 = ({text, style: _styles}: IHeader) => {
   const colorScheme = useColorScheme();
 
   return (

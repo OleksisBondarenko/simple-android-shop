@@ -15,7 +15,7 @@ export default function HomeScreen() {
   const navigate = useNavigation();
   
   useEffect(() => {
-    
+    console.log(process.env.MONGO_LOGIN, "proce");
   }, [])
 
   const handleGoToRegister = () => {
