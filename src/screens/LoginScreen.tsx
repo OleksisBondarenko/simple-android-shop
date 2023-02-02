@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 import { Text, View } from '../components/Themed';
@@ -14,26 +14,35 @@ import ButtonMain from '../components/ButtonMain';
 import ButtonTransparent from '../components/ButtonTransparent';
 import TextBoxLogin from '../components/TextBoxLogin';
 import userStore from '../store/userStore';
-// import { authUser } from '../services/db';
+import axios from 'axios';
+import useAPIAdress from '../hooks/useAPIAdress';
 
 export default function LoginScreen() {
-  const navigator = useNavigation();
+  const navigate = useNavigation();
   const colorScheme = useColorScheme();
   const { user } = userStore;
+  const api_url = useAPIAdress(); 
 
   const refEmail = useRef<string>("");
   const refPassword = useRef<string>("");
     
 
   const handleLogin = () => {
+    axios.post(api_url("user/login"), {email: refEmail.current, password: refPassword.current}).then(res => {
+      const user = res.data;
+      
+      userStore.setCurrentUser(user);
+
+      console.log(res);
+      
+      Alert.alert("Login", `You logged in: user: ${user.name}`);
+      navigate.navigate("Home")
+    }).catch(console.log)
     
-    console.log(user);
-    
-    navigator.navigate("Home")
   }
 
   const handleGoSignUp  = () => {
-    navigator.navigate("Register")
+    navigate.navigate("Register")
   } 
 
 
@@ -46,7 +55,7 @@ export default function LoginScreen() {
           <Header1 text={'LOGIN'} />
         </View>
         <View style={styles.textInput}>
-          <TextBoxLogin defaultValue={user.email} onChangeText={text => refEmail.current = text} icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
+          <TextBoxLogin onChangeText={text => refEmail.current = text} icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
         </View>
         <View style={styles.textInput}>
           <TextBoxPassword onChangeText={text => refPassword.current = text}></TextBoxPassword>

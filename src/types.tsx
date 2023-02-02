@@ -58,7 +58,7 @@ export interface IProduct {
     name: string,
     imageURL: string,
     description: string,
-    reviews:  IReview[],
+    reviews:  IReview [],
     price: number,
     actualPrice?: number | null,
     isAvailable?: boolean

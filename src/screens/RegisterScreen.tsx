@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 import React, { useRef, useState } from 'react';
 import { Alert, StyleSheet, Text } from 'react-native';
 import ButtonMain from '../components/ButtonMain';
@@ -9,16 +10,19 @@ import TextBox from '../components/TextBox';
 import TextBoxLogin from '../components/TextBoxLogin';
 import TextBoxPassword from '../components/TextBoxPassword';
 
+
 import { View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import Layout from '../constants/Layout';
 import useColorScheme from '../hooks/useColorScheme';
 import userStore from '../store/userStore';
 import { IUser } from '../types';
+import useAPIAdress from '../hooks/useAPIAdress';
 
 export default function RegisterScreen() {
   const colorScheme = useColorScheme();
   const navigate = useNavigation();
+  const api_url = useAPIAdress();
 
   const refName = useRef<string>("");
   const refEmail = useRef<string>("");
@@ -30,7 +34,7 @@ export default function RegisterScreen() {
   const [isRePassCorrect, setIsRePassCorrect] = useState<boolean>(true)
   const [isPassCorrect, setIsPassCorrect] = useState<boolean>(true)
   
-  const handleRegister = () => {
+  const handleRegister = async () => {
     const user = {
       activatedDate: "01 jan 2023",
       name: refName.current.toLocaleLowerCase(),
@@ -38,9 +42,11 @@ export default function RegisterScreen() {
       password: refPass.current.toLocaleLowerCase(),
     } as IUser
     
-    if (isNameCorrect && isEmailCorrect && isRePassCorrect && isPassCorrect) {
-      Alert.alert("Register", "User was created." + JSON.stringify(user));
-      navigate.navigate("Login");
+    if (isNameCorrect && isEmailCorrect && isRePassCorrect && isPassCorrect) {      
+      axios.post(api_url("user/register"), user).then(res => {
+        Alert.alert("Register", `User was created. username: ${user.name}`);
+        navigate.navigate("Login");
+      }).catch(console.log)
     } else {
       Alert.alert("Register", "Something is wrong.")
     } 

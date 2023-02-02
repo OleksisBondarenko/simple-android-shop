@@ -10,12 +10,17 @@ import BottomMenuBar from '../components/BottomMenuBar';
 import ProductsBuyList from '../components/ProductsBuyList';
 import ProductCard from '../components/ProductCard';
 import userStore from '../store/userStore';
+import useAPIAdress from '../hooks/useAPIAdress';
+import axios from "axios";
 
 export default function HomeScreen() {
   const navigate = useNavigation();
-  
+  const api_url = useAPIAdress();
+
   useEffect(() => {
-    console.log(process.env.MONGO_LOGIN, "proce");
+    const api = api_url("user/all"); 
+    
+    fetch(api).then(res => res.json()).then(data => { return console.log(data)})
   }, [])
 
   const handleGoToRegister = () => {

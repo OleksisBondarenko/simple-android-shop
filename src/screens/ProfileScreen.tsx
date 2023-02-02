@@ -53,7 +53,7 @@ export default observer(() => {
         </View>
       </View>
       <View style={[styles.buttons]}>
-        <TouchableOpacity style={[styles.center, styles.button, styles.flex1]} onPress={() => handleSelectMenu(Menu.product)}><Header3 text={'Products'}></Header3></TouchableOpacity>
+        {/* <TouchableOpacity style={[styles.center, styles.button, styles.flex1]} onPress={() => handleSelectMenu(Menu.product)}><Header3 text={'Products'}></Header3></TouchableOpacity> */}
         <ButtonMain containerStyles={{...styles.center, ...styles.button, ...styles.flex1}} onPress={handleGoHome} icon={<Header3 text={'Go home'}></Header3>}></ButtonMain>
         <TouchableOpacity style={[styles.center, styles.button, styles.flex1]} onPress={() => handleSelectMenu(Menu.user)}><Header3 text={'Profile'}></Header3></TouchableOpacity>
       </View>

@@ -32,7 +32,7 @@ export default function RootStack() {
 
   return (
     <Stack.Navigator
-      initialRouteName= {"Profile" || startPage}
+      initialRouteName= {"Login" || startPage}
       screenOptions={{
         navigationBarColor: Colors[colorScheme].tint,
         headerBackVisible: false,

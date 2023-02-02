@@ -15,7 +15,7 @@ export interface ITextBox extends TextInputProps, React.ClassAttributes<TextInpu
 }
 
 const TextBox = ({ onChangeText,...props}: ITextBox) => {
-  let { icon, defaultValue, onIconPress,  textInputStyles, containerStyles  } = props;
+  let { icon, onIconPress,  textInputStyles, containerStyles  } = props;
 
   const [text, setText] = useState<string>("");
 
@@ -40,7 +40,7 @@ const TextBox = ({ onChangeText,...props}: ITextBox) => {
     <View style={containerStyles}>
       <Pressable onPress={handleIconPress}>{icon}</Pressable>
       <TextInput {...props} style={textInputStyles} onChangeText={handleChangeText} value={text} 
-      placeholderTextColor={Colors.light.darkGray} defaultValue={defaultValue} ></TextInput>
+      placeholderTextColor={Colors.light.darkGray} ></TextInput>
     </View>
   )
 }

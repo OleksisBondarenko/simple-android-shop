@@ -19,6 +19,8 @@ const BottomMenuBar = () => {
   }
 
   const handleUserPress = () => {
+    console.log({...user});
+    
     if (user.isActive) {
       navigator.navigate("Profile");
     } else {

@@ -7,11 +7,11 @@ class Product {
   newImageURI: string = DEFAULT_USER_IMAGE
   user: IUser = {
     name: "No_user_name",
-    email: "some.email@gmail.com",
-    password: "some secred password",
+    email: "No_email",
+    password: "",
     phoneNumber: "38099991123",
     activatedDate: "21 January 2023",
-    isActive: true,
+    isActive: false,
     buyedProducts:  [],
     cartProducts: [],
     imageURI: DEFAULT_USER_IMAGE 
@@ -21,21 +21,22 @@ class Product {
   constructor() {
     makeAutoObservable(this)
 
-    this.user.cartProducts.push(...MOCK_PRODUCTS_LIST.filter(product => product.isAvailable).map(product => {return {...product, count: 1, key: Symbol(product.name) } as IProductCount}))
+    // this.user.cartProducts.push(...MOCK_PRODUCTS_LIST.filter(product => product.isAvailable).map(product => {return {...product, count: 1, key: Symbol(product.name) } as IProductCount}))
   }
 
   updateNewImage(uri: string ) {
     this.newImageURI = uri;
   }
+
   updateUser(newUser: IUser) {
-    this.user = newUser;
+    this.setCurrentUser(newUser);
   }
 
   
   addCartProduct (product: IProduct, count: number = 1) {
     const key = Symbol(product.name)
     const newProduct = {...product, count, key} as IProductCount
-
+    
     this.user.cartProducts.push(newProduct)
   }
 
@@ -54,6 +55,16 @@ class Product {
 
   setCurrentUser (user: IUser) {
     this.user = user;
+    console.log(user);
+    
+    let newUser = {...this.user}
+    newUser.buyedProducts = [];
+    newUser.cartProducts = [];
+    for (let key in user) {
+      if (this.user[key]) newUser[key] = user[key]
+    }
+
+    this.user = newUser;
   }
 }
 
