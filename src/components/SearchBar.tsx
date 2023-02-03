@@ -5,6 +5,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import { FontAwesome } from '@expo/vector-icons';
 import TextBox from './TextBox';
 import Layout from '../constants/Layout';
+import productStore from '../store/productStore';
 
 export interface ISearchBar {
   props?: TextInputProps
@@ -16,6 +17,8 @@ const SearchBar = ({ props, onIconPress }: ISearchBar) => {
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme];
 
+  const { allProducts, foundProducts } = productStore;
+
   const handleIconPress = () => {
     if (onIconPress) {
       onIconPress();
@@ -23,9 +26,16 @@ const SearchBar = ({ props, onIconPress }: ISearchBar) => {
     refInput.current?.focus();
     console.log();
   }
+
+  const onChangeText = (text) => {
+    const foundProducts = allProducts.filter(product => product.name.toLocaleLowerCase().includes(text.toLocaleLowerCase()))
+
+    productStore.setFoundProducts(foundProducts)
+  }
+
   return (
     <View style={styles.container}>
-      <TextBox ref={refInput}  icon={
+      <TextBox ref={refInput} onChangeText={onChangeText}  icon={
         <View style={[styles.separatorBox]}>
           <FontAwesome name="search" style={styles.icon} onPress={handleIconPress}></FontAwesome>
           <View style={styles.separator}></View>

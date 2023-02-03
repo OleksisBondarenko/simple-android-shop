@@ -12,19 +12,27 @@ import ProductCard from '../components/ProductCard';
 import userStore from '../store/userStore';
 import useAPIAdress from '../hooks/useAPIAdress';
 import axios from "axios";
+import { observer } from 'mobx-react-lite';
+import productStore from '../store/productStore';
+import ButtonFullWidth from '../components/ButtonFullWidth';
+import loaderStore from '../store/loaderStore';
 
-export default function HomeScreen() {
+export default observer(function HomeScreen() {
   const navigate = useNavigation();
   const api_url = useAPIAdress();
 
   useEffect(() => {
-    const api = api_url("user/all"); 
-    
-    fetch(api).then(res => res.json()).then(data => { return console.log(data)})
+    const api = api_url("product/all"); 
+    fetch(api).then(res => res.json()).then(data => { productStore.setAllProducts(data)})
   }, [])
 
   const handleGoToRegister = () => {
     navigate.navigate("Login");
+  }
+
+  const updateProducts = () => {
+    const api = api_url("product/all"); 
+    axios.get(api).then(data => { console.log(data)})
   }
 
   return (
@@ -32,6 +40,8 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <View style={[styles.searchBar, styles.marginCenter]}>
           <SearchBar></SearchBar>
+          <ButtonFullWidth onPress={updateProducts} containerStyles={{width: Layout.window.width * 0.9, marginTop: 10}} text="Update product"></ButtonFullWidth>
+      
         </View >
         <View style={styles.products}>
           <ProductsBuyList></ProductsBuyList>
@@ -42,7 +52,7 @@ export default function HomeScreen() {
       </View>
     </View>
   );
-}
+})
 
 const styles = StyleSheet.create({
   wrapper: {

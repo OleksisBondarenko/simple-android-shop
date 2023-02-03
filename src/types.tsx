@@ -55,6 +55,7 @@ export interface IReview {
 }
 
 export interface IProduct {
+  _id: any,
     name: string,
     imageURL: string,
     description: string,

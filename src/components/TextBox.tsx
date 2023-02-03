@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { View,  StyleSheet, TextInput, Pressable, TextInputProps, TextStyle, ViewStyle } from 'react-native';
 import { StyleProps } from 'react-native-reanimated';
 import Colors from '../constants/Colors';
@@ -15,10 +15,13 @@ export interface ITextBox extends TextInputProps, React.ClassAttributes<TextInpu
 }
 
 const TextBox = ({ onChangeText,...props}: ITextBox) => {
-  let { icon, onIconPress,  textInputStyles, containerStyles  } = props;
+  let { icon, onIconPress,  textInputStyles, containerStyles, value  } = props;
 
-  const [text, setText] = useState<string>("");
+  const [text, setText] = useState<string>(value ? String(value) : "");
 
+  useEffect(() => {
+    setText(value ? String(value) : "");
+  }, [value])
   const handleChangeText = (text) => {
     setText(text);
 

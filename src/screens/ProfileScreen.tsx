@@ -13,6 +13,7 @@ import userStore from '../store/userStore';
 import ButtonMain from '../components/ButtonMain';
 import ImagePicker from '../components/ImagePicker';
 import { observer} from 'mobx-react-lite';
+import UpdateProduct from '../components/UpdateProduct';
 
 enum Menu {
   user,
@@ -36,11 +37,11 @@ export default observer(() => {
     user.isActive = false;
     navigation.navigate("Login");
   }
-  const newMenu = selectedMenuName === Menu.user ? <UpdateUser user={user} /> : undefined;
+  const newMenu = selectedMenuName === Menu.user ? <UpdateUser user={user} /> : <UpdateProduct />;
    
 
   return (
-    <ScrollView style={[styles.container, styles.flex1]}>
+    <ScrollView style={[styles.container, styles.flex1]} nestedScrollEnabled={true}>
       <View style={[styles.top]}>
         <View style={[styles.center, styles.transparent]}>
           <Image style={styles.image} source={{ uri: newImageURI || (user.imageURI ?? DEFAULT_USER_IMAGE) }}></Image>
@@ -53,7 +54,7 @@ export default observer(() => {
         </View>
       </View>
       <View style={[styles.buttons]}>
-        {/* <TouchableOpacity style={[styles.center, styles.button, styles.flex1]} onPress={() => handleSelectMenu(Menu.product)}><Header3 text={'Products'}></Header3></TouchableOpacity> */}
+        <TouchableOpacity style={[styles.center, styles.button, styles.flex1]} onPress={() => handleSelectMenu(Menu.product)}><Header3 text={'Products'}></Header3></TouchableOpacity>
         <ButtonMain containerStyles={{...styles.center, ...styles.button, ...styles.flex1}} onPress={handleGoHome} icon={<Header3 text={'Go home'}></Header3>}></ButtonMain>
         <TouchableOpacity style={[styles.center, styles.button, styles.flex1]} onPress={() => handleSelectMenu(Menu.user)}><Header3 text={'Profile'}></Header3></TouchableOpacity>
       </View>

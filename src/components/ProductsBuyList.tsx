@@ -7,13 +7,15 @@ import { IProduct } from '../types'
 import Header3 from './Header3'
 import ProductCard from './ProductCard'
 import productStore from '../store/productStore'
+import { observer } from 'mobx-react-lite'
 
 
 interface IProductBuyList {
   title?: string 
   products?: IProduct[]
 }
-const ProductsBuyList = ({title = 'All the products' }: IProductBuyList) => {
+
+ export default   observer( function  ProductsBuyList ({title = 'All the products' }: IProductBuyList) {
   const { foundProducts: products } = productStore;
 
   return (
@@ -22,7 +24,7 @@ const ProductsBuyList = ({title = 'All the products' }: IProductBuyList) => {
       <View style={styles.container}>
         {
           products.map((product, index) => {
-            return <View key={product.name} style={[styles.content, styles.border, index % 2 ? styles.rightBorder : null]}>
+            return <View key={product._id} style={[styles.content, styles.border, index % 2 ? styles.rightBorder : null]}>
               <ProductCard product={product}></ProductCard>
             </View>
           })
@@ -30,7 +32,7 @@ const ProductsBuyList = ({title = 'All the products' }: IProductBuyList) => {
       </View>
     </ScrollView>
   )
-}
+})
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -58,5 +60,3 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
   }
 })
-
-export default ProductsBuyList
