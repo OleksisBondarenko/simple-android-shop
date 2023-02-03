@@ -11,6 +11,8 @@ import ImagePicker from './ImagePicker';
 import TextBoxLogin from './TextBoxLogin';
 import TextBoxPassword from './TextBoxPassword';
 import { observer} from 'mobx-react-lite';
+import useAPIAdress from '../hooks/useAPIAdress';
+import axios from 'axios';
 
 export interface IUpdateUser {
   user: IUser,
@@ -19,6 +21,7 @@ export interface IUpdateUser {
 const UpdateUser = ({ user }: IUpdateUser) => {
   const refUser = useRef<IUser>({ ...user });
   const refRePass = useRef<string>(user.password);
+  const api_url = useAPIAdress();
 
   const [isEmailCorrect, setIsEmailCorrect] = useState<boolean>(true)
   const [isRePassCorrect, setIsRePassCorrect] = useState<boolean>(true)
@@ -38,13 +41,23 @@ const UpdateUser = ({ user }: IUpdateUser) => {
     console.log(refUser.current);
     const validFields = isEmailCorrect && isRePassCorrect && isPassCorrect;
     const isTheSameUser = JSON.stringify(userStore.user) === JSON.stringify(refUser.current)
+    const isImageTheSame = userStore.user.imageURI === userStore.newImageURI;
 
-    if (validFields && !isTheSameUser) {
+    if (validFields && (!isTheSameUser || !isImageTheSame)) {
       refUser.current.imageURI = String(userStore.newImageURI);
-      userStore.updateUser(refUser.current)
-      Alert.alert("Update", "Updated succesfully")
+
+      const user = refUser.current;
+      userStore.updateUser(user)
+
+      axios.put(api_url("user"), {id: user._id, user: user}).then(res => {
+
+        Alert.alert("Update", "Updated succesfully")
+      }) .catch(error => {
+        Alert.alert("Error", "Something went wrong...")
+      })
+
     }
-    if (isTheSameUser) {
+    else {
       Alert.alert("Hm...", "Nothing has changed")
     }
   }

@@ -49,7 +49,7 @@ export default observer(() => {
           <Header3 text={user.name} style={styles.text}></Header3>
         </View>
         <View style={[styles.center, styles.transparent]}>
-          <Text style={styles.text}>{user.activatedDate}</Text>
+          <Text style={styles.text}>registered {user.activatedDate}</Text>
         </View>
       </View>
       <View style={[styles.buttons]}>

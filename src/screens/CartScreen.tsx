@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Alert, StyleSheet } from 'react-native';
@@ -9,11 +10,13 @@ import Header1 from '../components/Header1';
 
 import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
+import useAPIAdress from '../hooks/useAPIAdress';
 import userStore from '../store/userStore';
 
 export default observer(() => {
   const navigate = useNavigation();
   const { cartProducts } = userStore.user;
+  const api_url = useAPIAdress();
 
   const handleCheckoutPress = () => {
     if (!cartProducts.length) {
@@ -23,7 +26,16 @@ export default observer(() => {
     Alert.alert("Purchase", `Are you sure to buy: ${cartProducts.map(product => `\n${product.count} x ${product.name}`)}`, [
       {
         text: "Yes",
-        onPress: () => {}
+        onPress: () => {
+          const user = {...userStore.user};
+    
+          axios.put(api_url("user"), {id: user._id, user: user}).then(res => {
+    
+            Alert.alert("Update", "Updated succesfully")
+          }) .catch(error => {
+            Alert.alert("Error", "Something went wrong...")
+          })
+        }
       },
       {
         text: "No",

@@ -4,10 +4,13 @@ import { IProduct } from "../types"
 
 class Product {
   selectedProduct: IProduct = MOCK_PRODUCTS_LIST[0]
-  foundProducts: IProduct[] = MOCK_PRODUCTS_LIST
+  foundProducts: IProduct[] = [];
+  allProducts: IProduct [] = MOCK_PRODUCTS_LIST
 
   constructor() {
     makeAutoObservable(this)
+
+    this.foundProducts.push(...this.allProducts)
   }
 
   addNewProduct (product: IProduct) {

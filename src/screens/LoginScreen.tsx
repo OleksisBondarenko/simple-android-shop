@@ -28,16 +28,22 @@ export default function LoginScreen() {
     
 
   const handleLogin = () => {
-    axios.post(api_url("user/login"), {email: refEmail.current, password: refPassword.current}).then(res => {
+    console.log(api_url("user/login"));
+    const email = refEmail.current.toLocaleLowerCase();
+    const password = refPassword.current.toLocaleLowerCase();
+
+    axios.post(api_url("user/login"), {email: email, password: password}).then(res => {
       const user = res.data;
       
+      user.cartProducts =  [];
+      user.buyedProducts = [];      
       userStore.setCurrentUser(user);
-
-      console.log(res);
       
       Alert.alert("Login", `You logged in: user: ${user.name}`);
       navigate.navigate("Home")
-    }).catch(console.log)
+    }).catch(err => {
+      Alert.alert("Login", `Password is wrong...`);
+    })
     
   }
 

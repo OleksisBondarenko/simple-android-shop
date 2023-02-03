@@ -24,14 +24,13 @@ const SearchBar = ({ props, onIconPress }: ISearchBar) => {
     console.log();
   }
   return (
-    <View style={{ ...styles.container }}>
-      <TextBox props={{ ref: refInput }} icon={
-      <View style={[styles.separatorBox]}>
-        <FontAwesome name="search" style={styles.icon} onPress={handleIconPress}></FontAwesome>
-      <View style={styles.separator}></View></View>
-      
-      } stylesText={{ paddingVertical: 10, paddingLeft: 10, paddingRight: -10 }} />
-
+    <View style={styles.container}>
+      <TextBox ref={refInput}  icon={
+        <View style={[styles.separatorBox]}>
+          <FontAwesome name="search" style={styles.icon} onPress={handleIconPress}></FontAwesome>
+          <View style={styles.separator}></View>
+        </View>
+      } containerStyles={{ paddingVertical: 10, paddingLeft: 10, paddingRight: -10 }} />
     </View>
   )
 }
@@ -54,7 +53,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 20,
-    padding: 10,
+    padding: 4,
     color: Colors.light.darkGray,
   }
 })
