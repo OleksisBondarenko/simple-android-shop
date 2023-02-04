@@ -25,10 +25,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.lolmagexe.shopandroid"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b940ed88-fc15-49e6-a9be-1fc3d6ab1f4d"
+      }
     }
   }
 }

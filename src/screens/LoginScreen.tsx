@@ -28,8 +28,8 @@ export default function LoginScreen() {
     
 
   const handleLogin = () => {
-    refEmail.current = "user"
-    refPassword.current = "123456" 
+    // refEmail.current = "user"
+    // refPassword.current = "123456" 
     console.log(api_url("user/login"));
     const email = refEmail.current.toLocaleLowerCase();
     const password = refPassword.current.toLocaleLowerCase();
