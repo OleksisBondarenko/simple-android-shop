@@ -22,8 +22,8 @@ export default observer(function HomeScreen() {
   const api_url = useAPIAdress();
 
   useEffect(() => {
-    // const api = api_url("product/all");
-    // fetch(api).then(res => res.json()).then(data => { productStore.setAllProducts(data)})
+    const api = api_url("product/all");
+    fetch(api).then(res => res.json()).then(data => { productStore.setAllProducts(data)})
   }, [])
 
   const handleGoToRegister = () => {
