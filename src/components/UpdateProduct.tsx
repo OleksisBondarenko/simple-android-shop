@@ -84,7 +84,7 @@ const UpdateProduct = observer(() => {
   }
 
   const updateProducts = () => {
-    const api = api_url("product/all"); 
+    const api = api_url("product/all");
     loaderStore.loading()
     axios.get(api).then(data => { loaderStore.fulfilled(); productStore.setAllProducts(data.data)})
   }

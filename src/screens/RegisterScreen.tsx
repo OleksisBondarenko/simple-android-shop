@@ -46,7 +46,7 @@ export default function RegisterScreen() {
       axios.post(api_url("user/register"), user).then(res => {
         Alert.alert("Register", `User was created. username: ${user.name}`);
         navigate.navigate("Login");
-      }).catch(console.log)
+      }).catch((err) => console.log(err))
     } else {
       Alert.alert("Register", "Something is wrong.")
     } 
@@ -59,8 +59,9 @@ export default function RegisterScreen() {
   const validateEmail = () => {
     const text = refEmail.current;
 
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (reg.test(text)) {
+    // let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    // if (reg.test(text)) {
+      if (text.includes("@")){
       refEmail.current = text;
       setIsEmailCorrect(true)
       console.log("Email is Correct");
@@ -113,19 +114,19 @@ export default function RegisterScreen() {
 
         <View style={styles.textInput}>
           <TextBoxLogin containerStyles={nameFieldStyle} onChangeText={text => refName.current = text} onBlur={validateName} icon={<AntDesign name="user" size={24} color={Colors[colorScheme].main} />} />
-          {(refName.current.length && isNameCorrect) || <Text style={styles.errorText}>Login should be more than 3 symbols</Text>}
+          {!(refName.current.length && !isNameCorrect) || <Text style={styles.errorText}>Login should be more than 3 symbols</Text>}
         </View> 
         <View style={styles.textInput}>
           <TextBoxLogin containerStyles={emailFieldStyle} onChangeText={text => refEmail.current = text} onBlur={validateEmail} icon={<AntDesign name="mail" size={24} color={Colors[colorScheme].main} />} />
-          {(refPass.current.length   && isEmailCorrect) || <Text style={styles.errorText}>Wrong email</Text>}
+          {!(refPass.current.length   && !isEmailCorrect) || <Text style={styles.errorText}>Wrong email</Text>}
         </View>
         <View style={styles.textInput}>
-          <TextBoxPassword containerStyles={passFieldStyle} onChangeText={text => refPass.current = text} onBlur={validatePass}></TextBoxPassword>
-          {(refRePass.current.length && isPassCorrect) || <Text style={styles.errorText}>Password should be more than 6 symbols</Text>}
+          <TextBoxPassword containerStyles={passFieldStyle} onChangeText={text => { refPass.current = text; validatePass()}} onBlur={validatePass}></TextBoxPassword>
+          {!(refRePass.current.length && !isPassCorrect) || <Text style={styles.errorText}>Password should be more than 6 symbols</Text>}
         </View>
         <View style={styles.textInput}>
-          <TextBoxPassword containerStyles={rePassFieldStyle} onChangeText={text => refRePass.current = text} onBlur={validateRePass}></TextBoxPassword>
-          {(refEmail.current.length  && isRePassCorrect) || <Text style={styles.errorText}>Passwords should be the same</Text>}
+          <TextBoxPassword containerStyles={rePassFieldStyle} onChangeText={ text => { refRePass.current = text; validateRePass() }} onBlur={validateRePass}></TextBoxPassword>
+          {!(refEmail.current.length  && !isRePassCorrect) || <Text style={styles.errorText}>Passwords should be the same</Text>}
        
         </View>
         <ButtonMain text="SIGN UP" onPress={handleRegister} containerStyles={{paddingVertical: 10, paddingHorizontal: 40, marginBottom: 15}}></ButtonMain>
